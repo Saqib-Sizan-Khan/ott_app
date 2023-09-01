@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ottapp/views/screens/bottom_nav_page.dart';
+import 'package:ottapp/views/screens/content_info_page.dart';
 
 
 void main() {
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           canvasColor: Colors.grey[900]
         ),
-        home:const OTTBottomNav(),
+        home: ContentInfoPage(),
       ); },
     );
   }

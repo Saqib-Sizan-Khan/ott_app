@@ -7,7 +7,11 @@ import 'package:ottapp/views/widgets/category_horizontal_listview.dart';
 class ContentInfoPage extends StatelessWidget {
   ContentInfoPage({super.key});
 
-  final List ratingTextList = ["Action", "Adventure", "2H 45M", "✨3.5"];
+  final List ratingTextList = ["Action", "Adventure", "2H 45M", "⭐8.7"];
+  List actorsName = ["Vin\nDiesel", "Jason\nMomoa", "Alan\nRitchson", "Michelle\nRodriguez",
+    "Brie\nLarson", "Sung\nKang", "Charlize\nTheron", "Tyrese\nGibson",
+    "Jordana\nBrewster", "Jhon\nCena", "Nathalie\nEmmanuel"];
+
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,6 @@ class ContentInfoPage extends StatelessWidget {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-
               backgroundColor: Colors.black,
               leading: const Icon(
                 CupertinoIcons.back,
@@ -30,21 +33,19 @@ class ContentInfoPage extends StatelessWidget {
                 collapseMode: CollapseMode.parallax,
                 background: Container(
                     foregroundDecoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.black.withOpacity(1),
+                        gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                          Colors.black.withOpacity(0.9),
                           Colors.transparent,
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
-                    ),
+                        ])),
                     child: Container(
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(
-                            "assets/images/movie_9.jpg",
+                            "assets/images/movie_4.jpg",
                           ),
                         ),
                       ),
@@ -55,49 +56,53 @@ class ContentInfoPage extends StatelessWidget {
                     )),
                 stretchModes: const [StretchMode.blurBackground],
                 centerTitle: true,
-                titlePadding: EdgeInsets.only(left: 16.w),
+                titlePadding: EdgeInsets.symmetric(horizontal: 16.w),
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Transformers: \nRise of the Beasts",
-                      style: TextStyle(fontSize: 16.sp),
+                      "Fast X",
+                      style: TextStyle(
+                          fontSize: 18.sp, fontWeight: FontWeight.w600),
                     ),
-                    IconButton(
-                        onPressed: () {}, icon: Icon(CupertinoIcons.heart_fill))
+                    CircleAvatar(
+                        radius: 16.r,
+                        backgroundColor: Colors.grey.shade800,
+                        child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(CupertinoIcons.heart_fill,
+                                size: 17.sp, color: Colors.white)))
                   ],
                 ),
               ),
             ),
             SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.only(left: 16.0.w),
-                child: SizedBox(
-                  height: 80.h,
-                  child: ListView.separated(
+              child: SizedBox(
+                  height: 70.h,
+                  child: ListView.builder(
+                      itemCount: 4,
                       scrollDirection: Axis.horizontal,
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       itemBuilder: (BuildContext context, int index) {
-                        return Chip(
-                          label: Text(ratingTextList[index]),
-                          backgroundColor: Colors.grey.shade900,
-                          labelStyle: TextStyle(color: Colors.white),
+                        return Padding(
+                          padding: const EdgeInsets.all(4),
+                          child: Chip(
+                            labelPadding: const EdgeInsets.all(0),
+                            label: Text(ratingTextList[index]),
+                            backgroundColor: Colors.grey.shade800,
+                            side: const BorderSide(color: Colors.transparent),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            labelStyle: TextStyle(color: Colors.white),
+                          ),
                         );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          width: 2.w,
-                        );
-                      },
-                      itemCount: 4),
-                ),
-              ),
+                      })),
             ),
             SliverToBoxAdapter(
               child: Padding(
-                padding:
-                    EdgeInsets.only(left: 16.0.w, right: 16.0.w, top: 22.h),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -111,14 +116,11 @@ class ContentInfoPage extends StatelessWidget {
                     SizedBox(
                       height: 5.h,
                     ),
-                    const Text(
-                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                      " Lorem Ipsum has been the industry's standard dummy text "
-                      "ever since the 1500s, when an unknown printer took a galley "
-                      "of type and scrambled it to make a type specimen book. "
-                      "It has survived not only five centuries, but also the "
-                      "leap into electronic typesetting, remaining essentially "
-                      "unchanged. It was popularised in the 1960s with the release ",
+                    const Text( "Over many missions and against impossible odds, Dom Toretto and "
+                        "his family have outsmarted and outdriven every foe in their path. Now, "
+                        "they must confront the most lethal opponent they've ever faced. Fueled by "
+                        "revenge, a terrifying threat emerges from the shadows of the past to "
+                        "shatter Dom's world and destroy everything",
                       textAlign: TextAlign.justify,
                       style: TextStyle(color: Colors.grey),
                     )
@@ -144,33 +146,29 @@ class ContentInfoPage extends StatelessWidget {
                     SizedBox(height: 20.h),
                     SizedBox(
                       height: 200.h,
-                      child: ListView.separated(
+                      child: ListView.builder(
+                          itemCount: actorsName.length,
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
-                            return Column(
-                              children: [
-                                CircleAvatar(
-                                  radius: 70.r,
-                                  backgroundImage:
-                                      AssetImage("assets/images/spidey.jpg"),
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                const Text(
-                                  "Spidey",
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                              ],
+                            return Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Column(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 50.r,
+                                    backgroundImage:
+                                        AssetImage("assets/images/actor_$index.jpg"),
+                                  ),
+                                  SizedBox(height: 5.h),
+                                  Text(actorsName[index],
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                ],
+                              ),
                             );
-                          },
-                          separatorBuilder: (BuildContext context, int index) {
-                            return SizedBox(
-                              width: 16.w,
-                            );
-                          },
-                          itemCount: 6),
+                          }),
                     )
                   ],
                 ),
